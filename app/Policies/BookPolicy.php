@@ -28,7 +28,7 @@ class BookPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->hasRole('librarian');
     }
 
     /**
@@ -36,7 +36,7 @@ class BookPolicy
      */
     public function update(User $user, Book $book): bool
     {
-        return true;
+        return $user->hasRole('librarian');
     }
 
     /**
@@ -44,22 +44,6 @@ class BookPolicy
      */
     public function delete(User $user, Book $book): bool
     {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Book $book): bool
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Book $book): bool
-    {
-        return true;
+        return $user->hasRole('librarian');
     }
 }
