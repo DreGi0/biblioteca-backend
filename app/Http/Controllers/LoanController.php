@@ -25,6 +25,12 @@ class LoanController extends Controller
      */
     public function store(StoreLoanRequest $request)
     {
+        $user = $request->user();
+
+        if (!$user->hasAnyRole(['teacher', 'student'])) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         $book = Book::find($request->input('book_id'));
 
         if (! $book->is_available || $book->available_copies === 0) {

@@ -13,6 +13,11 @@ class ReturnLoanController extends Controller
      */
     public function __invoke(Request $request, Loan $loan)
     {
+        $user = $request->user();
+
+        if (!$user->hasAnyRole(['teacher', 'student'])) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
         if (! is_null($loan->return_at)) {
             return response()->json(['message' => 'Loan already returned'], 422);
