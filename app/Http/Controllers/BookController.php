@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function __construct() {
-        $this->authorizeResource(Book::class, 'book');
-    }
+    public function __construct() {}
 
     public function index(Request $request)
     {
@@ -35,6 +33,7 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Book::class);
         $book = Book::create($request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
@@ -48,7 +47,8 @@ class BookController extends Controller
     }
 
     public function update(Request $request, Book $book)
-    {
+    {   
+        $this->authorize('update', $book);
         $book->update($request->validate([
             'title' => 'sometimes|string',
             'description' => 'sometimes|string',
@@ -63,6 +63,7 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        $this->authorize('delete', $book);
         $book->delete();
 
         return response()->json(['message' => 'Book deleted'], 200);
