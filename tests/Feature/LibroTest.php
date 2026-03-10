@@ -17,7 +17,7 @@ class LibroTest extends TestCase
 
     private function userLibrarian(): User
     {
-        Role::firstOrCreate(['name' => 'librarian', 'guard_name' => 'api']);
+        Role::firstOrCreate(['name' => 'librarian', 'guard_name' => 'web']);
         $user = User::factory()->create();
         $user->assignRole('librarian');
         $this->actingAs($user, 'sanctum');
@@ -26,7 +26,7 @@ class LibroTest extends TestCase
 
     private function userStudent(): User
     {
-        Role::firstOrCreate(['name' => 'student', 'guard_name' => 'api']);
+        Role::firstOrCreate(['name' => 'student', 'guard_name' => 'web']);
         $user = User::factory()->create();
         $user->assignRole('student');
         $this->actingAs($user, 'sanctum');
@@ -35,7 +35,7 @@ class LibroTest extends TestCase
 
     private function userTeacher(): User
     {
-        Role::firstOrCreate(['name' => 'teacher', 'guard_name' => 'api']);
+        Role::firstOrCreate(['name' => 'teacher', 'guard_name' => 'web']);
         $user = User::factory()->create();
         $user->assignRole('teacher');
         $this->actingAs($user, 'sanctum');
