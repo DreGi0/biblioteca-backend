@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     protected function getDefaultGuardName(): string
     {
-        return 'api';
+        return 'web';
     }
 
     /**
