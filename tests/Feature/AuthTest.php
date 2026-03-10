@@ -106,8 +106,6 @@ class AuthTest extends TestCase
     /** @test */
     public function test_unauthenticated_user_cannot_logout()
     {
-        // IMPORTANTE: el header Accept: application/json le indica a Laravel
-        // que es una peticion de API y debe devolver 401 en vez de redirigir.
         $response = $this->withHeaders(['Accept' => 'application/json'])
                          ->post('/api/v1/logout');
 
@@ -143,7 +141,6 @@ class AuthTest extends TestCase
     /** @test */
     public function test_unauthenticated_user_cannot_view_profile()
     {
-        // IMPORTANTE: header Accept para que Laravel devuelva 401 y no redirija
         $response = $this->withHeaders(['Accept' => 'application/json'])
                          ->get('/api/v1/profile');
 
