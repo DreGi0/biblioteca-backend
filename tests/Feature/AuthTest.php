@@ -18,11 +18,13 @@ class AuthTest extends TestCase
         ]);
 
         // Ejecucion
-        $response = $this->post('/api/v1/login', [
+        $response = $this->postJson('/api/v1/login', [
             'email' => $user->email,
             'password' => 'test123',
         ]);
 
+        $response->dump(); // agrega esta línea antes del assertStatus
+        $response->assertStatus(200);
         // Verificacion
         $response->assertStatus(200);
         $response->assertJsonStructure([
